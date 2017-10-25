@@ -95,4 +95,27 @@ mod tests {
         /* Should now look like {A, !B} & {C, !D} */
         assert_eq!(cl2, clause![a2, b2]);
     }
+
+    #[test]
+    fn lrs_merge_reduce() {
+        let a1 = term!["A", "!B"];
+        let b1 = term!["A", "B"];
+        let c1 = term!["C", "!D"];
+
+        let mut cl1 = clause![a1, b1, c1];
+        cl1.reduce();
+        assert_eq!(cl1, clause![term!["A"], term!["C", "!D"]]);
+
+        /* ...Oh fuck this is a difficult one... */
+        let a2 = term!["A", "!B"];
+        let b2 = term!["A", "B"];
+        let c2 = term!["!A", "D"];
+        
+        let mut cl2 = clause![a2, b2, c2];
+        cl2.reduce();
+        cl2.reduce();
+        
+        /* It needs to have picked a2 and b2 first 😟 */
+        assert_eq!(cl2, clause![term!["D"]]);
+    }
 }
