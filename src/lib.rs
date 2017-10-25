@@ -5,8 +5,8 @@
 #[macro_use] mod terms;
 pub use terms::*;
 
-#[macro_use] mod equation;
-pub use equation::*;
+#[macro_use] mod clause;
+pub use clause::*;
 
 /* Unit tests below */
 mod tests;

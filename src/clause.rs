@@ -1,14 +1,15 @@
-//! A module that represents equations and works with terms
+//! A module that represents a logical clause and works with terms.
 
 use terms::*;
-use equation::OperationType::DERIVE;
-// use equation::OperationType::JOIN;
-// use equation::OperationType::DELETE;
-// use equation::OperationType::BRANCH;
+use clause::OperationType::DERIVE;
+// use clause::OperationType::JOIN;
+// use clause::OperationType::DELETE;
+// use clause::OperationType::BRANCH;
 
-/// Represents an equation in LRS standard form where each
-///  term is chained in an AND operation
-pub struct Equation {
+/// Represents a logical equation in conjunctive normal form
+/// Consists of a finite collection of Terms of symbols chained via OR
+/// that are chained in the clause with AND operations.
+pub struct Clause {
     pub terms: Vec<Term>,
 }
 
@@ -35,8 +36,8 @@ pub struct Operation<'a> {
 }
 
 
-impl Equation {
-    /// Insert a term naively into an equation
+impl Clause {
+    /// Insert a term naively into an clause
     pub fn insert(&mut self, term: Term) {
         self.terms.push(term);
     }
