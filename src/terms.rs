@@ -21,7 +21,7 @@ impl PartialEq for Symbol {
 /// Represents a list of symbols in OR operator chain which in a LRS notation
 ///   would make up something like { A, B, ¬C }. Insertions are sanitised to
 ///   make sure that there are never two contradicting symbols in the same term.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Term {
     pub symbols: Vec<Symbol>,
 }

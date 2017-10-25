@@ -93,6 +93,6 @@ mod tests {
         cl2.reduce();
 
         /* Should now look like {A, !B} & {C, !D} */
-        assert!(cl2 == clause![a2, b2]);
+        assert_eq!(cl2, clause![a2, b2]);
     }
 }
