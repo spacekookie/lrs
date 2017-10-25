@@ -72,14 +72,27 @@ mod tests {
 
     #[test]
     fn lrs_simple_reduce() {
-        let a = term!["A", "!B"];
-        let b = term!["C", "!D"];
-        let c = term!["E"];
+        let a1 = term!["A", "!B"];
+        let b1 = term!["C", "!D"];
+        let c1 = term!["E"];
 
-        let mut clause = clause![a, b, c];
+        let mut clause = clause![a1, b1, c1];
         clause.reduce();
 
         /* We should no longer contain "E" */
         assert!(! clause.contains(&term!["E"]));
+
+        ///// More complex example
+        let a2 = term!["A", "!B"];
+        let b2 = term!["C", "!D"];
+        let c2 = term!["E"];
+        let d = term!["F"];
+
+        let mut cl2 = clause![a2.clone(), b2.clone(), c2, d];
+        cl2.reduce();
+        cl2.reduce();
+
+        /* Should now look like {A, !B} & {C, !D} */
+        assert!(cl2 == clause![a2, b2]);
     }
 }
