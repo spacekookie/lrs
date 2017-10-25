@@ -8,22 +8,26 @@ use equation::OperationType::BRANCH;
 
 /// Represents an equation in LRS standard form where each
 ///  term is chained in an AND operation
-struct Equation {
-    terms: Vec<Term>,
+pub struct Equation {
+    pub terms: Vec<Term>,
 }
 
 
 /// Describes a reduce operation type
-enum OperationType {
+pub enum OperationType {
+    /// Eliminates single symbol terms
     DERIVE,
+    /// Joins two terms, eliminating at most one symbol
     JOIN,
+    /// Delete a symbol from a term for different reasons
     DELETE,
+    /// Run a branching scenario
     BRANCH,
 }
 
 
 /// Represents a reduce operation and every piece of data involved
-struct Operation<'a> {
+pub struct Operation<'a> {
     _type: OperationType,
     term: Vec<&'a Term>,
     symbol: Vec<&'a Symbol>,
@@ -41,7 +45,9 @@ impl Equation {
         /* First we search for single defined terms */
         let single = self.search_single_terms();
         match single {
-            Some(term) => {}
+            Some(term) => {
+                println!("Fooo");
+            }
             None => {}
         }
 
