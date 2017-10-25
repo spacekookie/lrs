@@ -1,6 +1,6 @@
 # Logical Resolution Solver
 
-[![Build Status](https://travis-ci.org/spacekookie/lrs.svg?branch=master)](https://travis-ci.org/spacekookie/lrs)
+[![Build Status](https://travis-ci.org/spacekookie/lrs.svg?branch=master)](https://travis-ci.org/spacekookie/lrs) [![Build status](https://ci.appveyor.com/api/projects/status/k7cvf2pvxbr0vhgi/branch/master?svg=true)](https://ci.appveyor.com/project/spacekookie/lrs/branch/master) 
 
 This is a crate that allows you to quickly (eh...more or less) solve logical equations (clauses) in conjunctive normal form for solvability.
 
