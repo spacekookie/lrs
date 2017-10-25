@@ -47,10 +47,11 @@ impl Clause {
         /* First we search for single defined terms */
         let single = self.search_single_terms();
         match single {
-            Some(_) => {}
+            Some(t) => {
+                
+            }
             None => {}
         }
-
 
         return Operation {
             _type: DERIVE,
