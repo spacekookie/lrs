@@ -9,8 +9,27 @@ use clause::OperationType::DERIVE;
 /// Represents a logical equation in conjunctive normal form
 /// Consists of a finite collection of Terms of symbols chained via OR
 /// that are chained in the clause with AND operations.
+#[derive(Debug)]
 pub struct Clause {
     pub terms: Vec<Term>,
+}
+
+impl PartialEq for Clause {
+    fn eq(&self, other: &Clause) -> bool {
+        for t in &self.terms {
+            if !other.contains(t) {
+                return false
+            }
+        }
+
+        for t in &other.terms {
+            if !self.contains(t) {
+                return false
+            }
+        }
+
+        return true;
+    }
 }
 
 
@@ -37,6 +56,7 @@ pub struct Operation<'a> {
 
 
 impl Clause {
+
     /// Insert a term naively into an clause
     pub fn insert(&mut self, term: Term) {
         self.terms.push(term);
@@ -63,7 +83,6 @@ impl Clause {
         self.terms = newvec;
     }
 
-
     /// Run a single reduce step and return the exact reduce operation
     pub fn reduce(&mut self) -> Operation {
 
@@ -78,18 +97,14 @@ impl Clause {
         };
     }
 
-
     /// Check if a term is contained in this clause. The order of symbols
     ///   in the terms don't matter, as long as the values are the same
     ///
     /// This function is relatively slow (O(n²)) because it compares 
     ///   all symbols in a term with all symbols in the term provided
     pub fn contains(&self, term: &Term) -> bool {
-
-        println!("{:?}", term.symbols);
         for t in &self.terms {
             if t == term {
-                println!("{:?}", t.symbols);
                 return true;
             }
         }
@@ -114,7 +129,6 @@ impl Clause {
         }
         self.remove(term.clone());
     }
-
 
     /// Will return the first single-value term it encounters
     fn search_single_terms(&mut self) -> Option<Term> {

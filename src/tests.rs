@@ -57,8 +57,8 @@ mod tests {
 
     #[test]
     fn lrs_compare_clauses() {
-        let c1 = clause![term!["A"], term!["!B"]];
-        let c2 = clause![term!["A"], term!["!B"]];
+        let c1 = clause![term!["A"]];
+        let c2 = clause![term!["A"]];
         assert_eq!(c1, c2);
 
         let c3 = clause![term!["A", "B"], term!["!B"]];
