@@ -1,5 +1,6 @@
-extern crate lrs;
+#[macro_use] extern crate lrs;
 use lrs::*;
+
 
 fn main() {
     let mut term = Term::new(Symbol { val: 'A', state: false });
@@ -16,4 +17,6 @@ fn main() {
         };
         println!("{}{}", n, s.val);
     }
+
+    term!["A"];
 }
