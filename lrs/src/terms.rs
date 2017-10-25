@@ -6,6 +6,7 @@
 
 
 /// A logical symbol in a term
+#[derive(Copy, Clone, Debug)]
 pub struct Symbol {
     pub val: char,
     pub state: bool,
@@ -26,10 +27,11 @@ pub struct Term {
 
 
 impl Term {
-
     /// Very simple constructor that initialises a term with one symbol
     pub fn new(symbol: Symbol) -> Term {
-        let mut t = Term { symbols: Vec::new() };
+        let mut t = Term {
+            symbols: Vec::new(),
+        };
 
         t.symbols.push(symbol);
         return t;
@@ -52,21 +54,37 @@ impl Term {
         if self.contains(&sym) {
             return false;
         }
-
+        
         self.symbols.push(sym);
         return true;
     }
 
-    /// Removes a symbol from this term if it exists
+    /// Removes a symbol from this term if it exists in linear time
     pub fn remove(&mut self, sym: Symbol) -> bool {
-        return false;
+        if !self.contains(&sym) {
+            return false;
+        }
+
+        /* Only push to new vector if value is right */
+        let mut newvec: Vec<Symbol> = Vec::new();
+        for s in &self.symbols {
+            if sym != *s {
+                newvec.push(*s);
+            }
+        }
+
+        /* Then use the new vector instead */
+        self.symbols = newvec;
+        return true;
     }
 
-    /// Merge another term with this one. Logically it is adding
-    ///   all symbols from the other term to this one, also eliminating
-    ///   counter-symbols (A, ¬A)
+    /// Merge two terms together in a very naive way. This function will only check
+    /// for same duplicates (to avoid { A, A, B } situations). This will however allow
+    /// { A, ¬A } scenarios. Those need to be removed manually
     pub fn merge(&mut self, other: Term) {
-
+        let ovec: Vec<Symbol> = other.symbols;
+        for sym in ovec.iter() {
+            self.insert(sym.clone());
+        }
     }
-
 }

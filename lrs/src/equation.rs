@@ -2,9 +2,9 @@
 
 use terms::*;
 use equation::OperationType::DERIVE;
-use equation::OperationType::JOIN;
-use equation::OperationType::DELETE;
-use equation::OperationType::BRANCH;
+// use equation::OperationType::JOIN;
+// use equation::OperationType::DELETE;
+// use equation::OperationType::BRANCH;
 
 /// Represents an equation in LRS standard form where each
 ///  term is chained in an AND operation
@@ -27,6 +27,7 @@ pub enum OperationType {
 
 
 /// Represents a reduce operation and every piece of data involved
+#[allow(dead_code)]
 pub struct Operation<'a> {
     _type: OperationType,
     term: Vec<&'a Term>,
@@ -42,10 +43,12 @@ impl Equation {
 
     /// Run a single reduce step and return the exact reduce operation
     pub fn reduce(&mut self) -> Operation {
+        // let mut vec = Vec::new();
+
         /* First we search for single defined terms */
         let single = self.search_single_terms();
         match single {
-            Some(term) => {
+            Some(_) => {
                 println!("Fooo");
             }
             None => {}
