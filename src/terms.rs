@@ -25,6 +25,25 @@ pub struct Term {
     pub symbols: Vec<Symbol>,
 }
 
+impl PartialEq for Term {
+    fn eq(&self, other: &Term) -> bool {
+        for s in &self.symbols {
+            if !other.contains(s) {
+                return false;
+            }
+        }
+
+        for s in &other.symbols {
+            if !self.contains(s) {
+                return false;
+            }
+        }
+
+        // return self.symbols == other.symbols;
+        return true;
+    }
+}
+
 
 impl Term {
     /// Very simple constructor that initialises a term with one symbol
