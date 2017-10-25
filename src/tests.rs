@@ -42,4 +42,30 @@ mod tests {
         term.remove(symbol!["!🚀"]);
         assert!(! term.contains(&symbol!["!🚀"]));
     }
+
+    #[test]
+    fn lrs_compare_terms() {
+        let a = term!["A", "B"];
+        let b = term!["B", "C"];
+        let clause = clause![a, b];
+
+        assert!(clause.contains(&term!["A", "B"]));
+        assert!(clause.contains(&term!["B", "A"]));
+
+        assert!(clause.contains(&term!["C", "B"]));
+        assert!(! clause.contains(&term!["C", "D"]));
+    }
+
+    #[test]
+    #[ignore]
+    fn lrs_simple_reduce() {
+        let a = term!["A", "!B"];
+        let b = term!["C", "!D"];
+        let c = term!["E"];
+
+        let mut clause = clause![a, b, c];
+        clause.reduce();
+
+
+    }
 }
