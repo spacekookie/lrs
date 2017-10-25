@@ -2,10 +2,10 @@
 //!
 //! For now I guess enjoy this emoji of a cup 🍵
 
-mod terms;
+#[macro_use] mod terms;
 pub use terms::*;
 
-mod equation;
+#[macro_use] mod equation;
 pub use equation::*;
 
 /* Unit tests below */

@@ -54,7 +54,7 @@ impl Term {
         if self.contains(&sym) {
             return false;
         }
-        
+
         self.symbols.push(sym);
         return true;
     }
@@ -87,4 +87,46 @@ impl Term {
             self.insert(sym.clone());
         }
     }
+}
+
+
+/// A helper macro that creates terms with a variable amount of symbols
+///   based on the more user friendly syntax
+///
+/// term!["A", "!B", "C"]
+///
+/// Please note that your symbols aren't allowed to be multi-character
+/// but can include all utf-8 symbols (including emoji 🔥🎉)
+#[macro_export]
+macro_rules! term {
+    ( $( $x:expr ),* ) => {{
+        let mut ts: Vec<Symbol> = Vec::new();
+
+        $( 
+            if $x.starts_with('!') {
+                let ch = $x.chars().nth(1).unwrap();
+                ts.push( Symbol { val: ch, state: false });
+            } else {
+                let ch = $x.chars().nth(0).unwrap();
+                ts.push( Symbol { val: ch, state: true });
+            }
+        )*
+        
+        Term { symbols: ts }
+    }};
+}
+
+
+/// A slightly smaller helper macro that creates a symbol based on a string
+#[macro_export]
+macro_rules! symbol {
+    ($x:expr) => {{
+        if $x.starts_with('!') {
+            let ch = $x.chars().nth(1).unwrap();
+            Symbol { val: ch, state: false }
+        } else {
+            let ch = $x.chars().nth(0).unwrap();
+            Symbol { val: ch, state: true }
+        }
+    }};
 }
