@@ -101,17 +101,7 @@ impl Term {
 macro_rules! term {
     ( $( $x:expr ),* ) => {{
         let mut ts: Vec<Symbol> = Vec::new();
-
-        $( 
-            if $x.starts_with('!') {
-                let ch = $x.chars().nth(1).unwrap();
-                ts.push( Symbol { val: ch, state: false });
-            } else {
-                let ch = $x.chars().nth(0).unwrap();
-                ts.push( Symbol { val: ch, state: true });
-            }
-        )*
-        
+        $( ts.push(symbol!($x)); )*        
         Term { symbols: ts }
     }};
 }
