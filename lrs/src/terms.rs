@@ -18,8 +18,8 @@ impl PartialEq for Symbol {
 }
 
 /// Represents a list of symbols in OR operator chain which in a LRS notation
-/// would make up something like { A, B, ~C }. Insertions are sanitised to make
-/// sure that there are never two contradicting symbols in the same term
+///   would make up something like { A, B, ¬C }. Insertions are sanitised to
+///   make sure that there are never two contradicting symbols in the same term.
 pub struct Term {
     pub symbols: Vec<Symbol>,
 }
@@ -36,7 +36,7 @@ impl Term {
     }
 
     /// Simple linear `contains` function for a Term. Avoid using this
-    ///  as it can lead to high runtimes on longer terms.
+    ///   as it can lead to high runtimes on longer terms.
     pub fn contains(&self, sym: &Symbol) -> bool {
         for symbol in self.symbols.iter() {
             if symbol == sym {
@@ -56,4 +56,17 @@ impl Term {
         self.symbols.push(sym);
         return true;
     }
+
+    /// Removes a symbol from this term if it exists
+    pub fn remove(&mut self, sym: Symbol) -> bool {
+        return false;
+    }
+
+    /// Merge another term with this one. Logically it is adding
+    ///   all symbols from the other term to this one, also eliminating
+    ///   counter-symbols (A, ¬A)
+    pub fn merge(&mut self, other: Term) {
+
+    }
+
 }
