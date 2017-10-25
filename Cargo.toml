@@ -1,6 +1,6 @@
 [package]
 name = "lrs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Katharina Fey <kookie@spacekookie.de>"]
 description= "Library for resolving (conjunctive) normal-form logical clauses"
 license = "MIT/X11"
