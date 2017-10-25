@@ -3,6 +3,7 @@ name = "lrs"
 version = "0.1.0"
 authors = ["Katharina Fey <kookie@spacekookie.de>"]
 description= "Library for resolving (conjunctive) normal-form logical clauses"
+license = "MIT/X11"
 
 documentation = "https://docs.rs/lrs/"
 repository = "https://github.com/spacekookie/lrs/"
