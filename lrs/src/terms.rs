@@ -7,13 +7,13 @@
 
 /// A logical symbol in a term
 pub struct Symbol {
-    pub v: char,
-    pub s: bool,
+    pub val: char,
+    pub state: bool,
 }
 
 impl PartialEq for Symbol {
     fn eq(&self, other: &Symbol) -> bool {
-        self.v == other.v && self.s == other.s
+        self.val == other.val && self.state == other.state
     }
 }
 
@@ -26,6 +26,15 @@ pub struct Term {
 
 
 impl Term {
+
+    /// Very simple constructor that initialises a term with one symbol
+    pub fn new(symbol: Symbol) -> Term {
+        let mut t = Term { symbols: Vec::new() };
+
+        t.symbols.push(symbol);
+        return t;
+    }
+
     /// Simple linear `contains` function for a Term. Avoid using this
     ///  as it can lead to high runtimes on longer terms.
     pub fn contains(&self, sym: &Symbol) -> bool {

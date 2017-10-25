@@ -1,22 +1,19 @@
-pub struct Symbol {
-    v: char,
-    s: bool
-}
-
-impl PartialEq for Symbol {
-    fn eq(&self, other: &Symbol) -> bool {
-        self.v == other.v && self.s == other.s
-    }
-}
-
+extern crate lrs;
+use lrs::*;
 
 fn main() {
-    let a = Symbol { v: 'A', s: true };
-    let nb = Symbol { v: 'B', s: false };
-    
-    println!("Compare: {:?}", compare(a, nb));
-}
+    let mut term = Term::new(Symbol { val: 'A', state: false });
+    term.insert(Symbol { val: 'B', state: true });
+    term.insert(Symbol { val: 'C', state: false });
 
-fn compare(a: Symbol, b: Symbol) -> bool {
-    return a == b;
+    // No nice way to print yet :(
+    // println!("{:?}", term);
+
+    for s in term.symbols.iter() {
+        let n = match s.state {
+            true => "",
+            false => "~"
+        };
+        println!("{}{}", n, s.val);
+    }
 }
