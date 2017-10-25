@@ -26,7 +26,6 @@ mod tests {
     }
 
     #[test]
-    #[allow(unused_variables)]
     fn lrs_term_remove() {
         let mut term = term!["A", "!🐎", "🐟", "!🚀"];
 
@@ -65,7 +64,5 @@ mod tests {
 
         let mut clause = clause![a, b, c];
         clause.reduce();
-
-
     }
 }
