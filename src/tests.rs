@@ -6,7 +6,7 @@
 #[allow(unused_imports)]
 mod tests {
     use terms::*;
-    use equation::*;
+    use clause::*;
 
     // macro_rules! symbol {
     //     ($v:expr, $s:expr) => ( Symbol { val: $v, state: $s } );
