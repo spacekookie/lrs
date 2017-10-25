@@ -42,29 +42,34 @@ impl Clause {
         self.terms.push(term);
     }
 
+    /// Removes a term from the clause based on it's values, not
+    ///   the order the symbols appear in the term in.
+    ///
+    /// This is a relatively slow function (it runs on linear time) so
+    ///   should be avoided whenever possible.
+    pub fn remove(&mut self, term: Term) {
+        if !self.contains(&term) {
+            return;
+        }
+        
+        /* Only push to new vector if value is right */
+        let mut newvec: Vec<Term> = Vec::new();
+        for t in &self.terms {
+            if term != *t {
+                newvec.push(t.clone());
+            }
+        }
+
+        self.terms = newvec;
+    }
+
+
     /// Run a single reduce step and return the exact reduce operation
     pub fn reduce(&mut self) -> Operation {
+
         /* First we search for single defined terms */
-        let single = self.search_single_terms();
-        match single {
-
-            /* If we find a single value */
-            Some(t) => {
-                let mut op = Operation {
-                    _type: DERIVE,
-                    term: Vec::new(),
-                    symbol: Vec::new(),
-                };
-
-                op.term.push(t);
-                for symbol in &t.symbols {
-                    op.symbol.push(symbol);
-                }
-
-                return op;
-            }
-            None => {}
-        }
+        let mut single: Term = self.search_single_terms().unwrap();
+        self.reduce_single_term(&mut single);
 
         return Operation {
             _type: DERIVE,
@@ -73,14 +78,18 @@ impl Clause {
         };
     }
 
+
     /// Check if a term is contained in this clause. The order of symbols
     ///   in the terms don't matter, as long as the values are the same
     ///
     /// This function is relatively slow (O(n²)) because it compares 
     ///   all symbols in a term with all symbols in the term provided
     pub fn contains(&self, term: &Term) -> bool {
+
+        println!("{:?}", term.symbols);
         for t in &self.terms {
             if t == term {
+                println!("{:?}", t.symbols);
                 return true;
             }
         }
@@ -90,11 +99,28 @@ impl Clause {
 
     //////////////////////////////////////////////////////////////
 
+    /// Reduces a single term from the clause (rule 1)
+    fn reduce_single_term(&mut self, term: &mut Term) {
+
+        let mut op = Operation {
+            _type: DERIVE,
+            term: Vec::new(),
+            symbol: Vec::new(),
+        };
+
+        op.term.push(term);
+        for symbol in &term.symbols {
+            op.symbol.push(symbol);
+        }
+        self.remove(term.clone());
+    }
+
+
     /// Will return the first single-value term it encounters
-    fn search_single_terms(&mut self) -> Option<&Term> {
+    fn search_single_terms(&mut self) -> Option<Term> {
         for term in self.terms.iter() {
             if term.symbols.len() == 1 {
-                return Some(term);
+                return Some(term.clone());
             }
         }
         return None;

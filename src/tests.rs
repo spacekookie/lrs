@@ -56,7 +56,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn lrs_simple_reduce() {
         let a = term!["A", "!B"];
         let b = term!["C", "!D"];
@@ -64,5 +63,8 @@ mod tests {
 
         let mut clause = clause![a, b, c];
         clause.reduce();
+
+        /* We should no longer contain "E" */
+        assert!(! clause.contains(&term!["E"]));
     }
 }
