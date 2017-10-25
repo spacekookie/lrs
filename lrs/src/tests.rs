@@ -21,18 +21,18 @@ mod tests {
 
     #[test]
     fn lrs_term_create() {
-        let term = term!["A", "!🐎", "🐟", "C"];
+        let term = term!["A", "!🐎", "🐟", "!🚀"];
 
         assert!(term.contains(&symbol!["A"]));
         assert!(term.contains(&symbol!["!🐎"]));
         assert!(term.contains(&symbol!["🐟"]));
-        assert!(term.contains(&symbol!["C"]));
+        assert!(term.contains(&symbol!["!🚀"]));
     }
 
     #[test]
     #[allow(unused_variables)]
     fn lrs_term_remove() {
-        let mut term = term!["A", "!🐎", "🐟", "C"];
+        let mut term = term!["A", "!🐎", "🐟", "!🚀"];
 
         term.remove(symbol!["A"]);
         assert!(! term.contains(&symbol!["A"]));
@@ -43,7 +43,7 @@ mod tests {
         term.remove(symbol!["🐟"]);
         assert!(! term.contains(&symbol!["🐟"]));
 
-        term.remove(symbol!["C"]);
-        assert!(! term.contains(&symbol!["C"]));
+        term.remove(symbol!["!🚀"]);
+        assert!(! term.contains(&symbol!["!🚀"]));
     }
 }
