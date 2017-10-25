@@ -8,10 +8,6 @@ mod tests {
     use terms::*;
     use clause::*;
 
-    // macro_rules! symbol {
-    //     ($v:expr, $s:expr) => ( Symbol { val: $v, state: $s } );
-    // }
-
     #[test]
      fn lrs_symbol_create() {
         let s = symbol!["A"];

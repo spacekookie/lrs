@@ -44,14 +44,10 @@ impl Clause {
 
     /// Run a single reduce step and return the exact reduce operation
     pub fn reduce(&mut self) -> Operation {
-        // let mut vec = Vec::new();
-
         /* First we search for single defined terms */
         let single = self.search_single_terms();
         match single {
-            Some(_) => {
-                println!("Fooo");
-            }
+            Some(_) => {}
             None => {}
         }
 
