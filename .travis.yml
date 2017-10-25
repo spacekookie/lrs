@@ -1,0 +1,16 @@
+dist: trusty
+language: rust
+services: docker
+sudo: required
+cache: cargo
+rust:
+  - stable
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
+
+script:
+  - cargo build --verbose --all
+  - cargo test --verbose --all
