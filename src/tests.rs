@@ -105,6 +105,8 @@ mod tests {
         assert_eq!(r.symbols.get(&symbol!["A"]).unwrap(), &false);
         assert_eq!(r.symbols.get(&symbol!["B"]).unwrap(), &true);
         assert_eq!(r.solvable, true);
+
+        println!("{:?}", r);
     }
 
     // #[test]
