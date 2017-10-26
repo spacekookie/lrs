@@ -11,9 +11,19 @@ matrix:
   allow_failures:
     - rust: nightly
 
+before_script:
+  - |
+      cargo install --force cargo-travis &&
+      export PATH=$HOME/.cargo/bin:$PATH
+
 script:
   - cargo build --verbose --all
   - cargo test --verbose --all
+  - cargo bench --all
+  - cargo doc
+
+after_success:
+  - cargo coveralls
 
 notifications:
   email:
