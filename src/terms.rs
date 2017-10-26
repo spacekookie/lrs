@@ -47,15 +47,6 @@ impl PartialEq for Term {
 
 
 impl Term {
-    /// Very simple constructor that initialises a term with one symbol
-    pub fn new(symbol: Symbol) -> Term {
-        let mut t = Term {
-            symbols: Vec::new(),
-        };
-
-        t.symbols.push(symbol);
-        return t;
-    }
 
     /// Simple linear `contains` function for a Term. Avoid using this
     ///   as it can lead to high runtimes on longer terms.

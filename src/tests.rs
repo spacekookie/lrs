@@ -55,6 +55,10 @@ mod tests {
         assert!(term.contains(&symbol!["A"]));
         assert!(term.contains(&symbol!["!A"]));
         assert!(term.contains(&symbol!["B"]));
+
+        /* Fail an insert */
+        term.insert(symbol!["B"]);
+        assert!(term.contains(&symbol!["B"]));
     }
 
     #[test]
