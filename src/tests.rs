@@ -47,6 +47,17 @@ mod tests {
     }
 
     #[test]
+    fn lrs_term_insert() {
+        let mut term = term!["A"];
+        term.insert(symbol!["!A"]);
+        term.insert(symbol!["B"]);
+
+        assert!(term.contains(&symbol!["A"]));
+        assert!(term.contains(&symbol!["!A"]));
+        assert!(term.contains(&symbol!["B"]));
+    }
+
+    #[test]
     fn lrs_compare_terms() {
         let a = term!["A", "B"];
         let b = term!["B", "C"];
