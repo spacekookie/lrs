@@ -30,6 +30,9 @@ mod tests {
     fn lrs_term_remove() {
         let mut term = term!["A", "!🐎", "🍝", "!📰"];
 
+        /* Try to remove something that doesn't exist */
+        term.remove(symbol!["!A"]);
+
         term.remove(symbol!["A"]);
         assert!(! term.contains(&symbol!["A"]));
 

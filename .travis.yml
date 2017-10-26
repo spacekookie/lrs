@@ -30,8 +30,7 @@ matrix:
 # Install the cargo travis suite
 before_script:
   - |
-      cargo install cargo-travis | true &&
-      export PATH=$HOME/.cargo/bin:$PATH
+      (cargo install cargo-travis | true) && export PATH=$HOME/.cargo/bin:$PATH
 
 # Build, test, benchmark, document. Gogogogo!
 script:
