@@ -5,7 +5,7 @@ sudo: required
 cache: cargo
 rust:
   - stable
-  - beta
+  # - beta
   - nightly
 matrix:
   allow_failures:
