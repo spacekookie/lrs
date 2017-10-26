@@ -58,6 +58,17 @@ mod tests {
     }
 
     #[test]
+    fn lrs_find_fuzzy() {
+        let a = term!["A", "B"];
+        let b = term!["A", "!A"];
+        let c = term!["A"];
+
+        assert!(a.is_fuzzy() == true);
+        assert!(b.is_fuzzy() == false);
+        assert!(c.is_fuzzy() == false);
+    }
+
+    #[test]
     fn lrs_compare_terms() {
         let a = term!["A", "B"];
         let b = term!["B", "C"];

@@ -98,6 +98,42 @@ impl Term {
         return true;
     }
 
+    /// Will find all symbols in a term that offend a logical state in that term
+    /// In other words they will find the boolean opposite of said term. This means
+    /// that if a term consists of { A, ¬A, B } this function will return 
+    /// both A and ¬A but not B because it's unrelated to the "offence"
+    pub fn find_offending(&self) -> Vec<Symbol> {
+        let mut v = Vec::new();
+
+        for s in &self.symbols {
+            if self.contains(&Symbol { val: s.val, state: s.state }) {
+                v.push(s.clone());
+            }
+        }
+
+        return v;
+    }
+
+    /// This function will determine if this is a fuzzy term
+    ///
+    /// What that means is that a term has a series of symbols that with themselves
+    /// aren't in conflict but at the same time don't conclude a well-defined
+    /// state. Each symbol in the term has multiple "fuzzy" interpretations that
+    /// still fullfil the entire term (or clause) without being a fixed result. 
+    pub fn is_fuzzy(&self) -> bool {
+        if self.symbols.len() == 1 {
+            return false;
+        }
+
+        for s in &self.symbols {
+            /* Find a symbol of same value, opposite state */
+            if self.contains(&Symbol { val: s.val, state: !s.state }) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /// Merge two terms together in a very naive way. This function will only check
     /// for same duplicates (to avoid { A, A, B } situations). This will however allow
     /// { A, ¬A } scenarios. Those need to be removed manually
