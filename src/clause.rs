@@ -39,8 +39,6 @@ pub enum OperationType {
     DERIVE,
     /// Joins two terms, eliminating at most one symbol
     JOIN,
-    /// Delete a symbol from a term for different reasons
-    DELETE,
     /// Run a branching scenario
     BRANCH,
 }
@@ -81,6 +79,15 @@ impl Clause {
         }
 
         self.terms = newvec;
+    }
+
+    /// Analyse the clause and return a series of possible operations to the
+    ///   user. If then calling `reduce` with the data returned from this 
+    ///   function it will let some options take prescedence over others
+    ///   according to the resolution scheme algorithm
+    pub fn consider_reduce(&self) -> Vec<Operation> {
+        let ops = Vec::new();
+        return ops;
     }
 
     /// Run a single reduce step and return the exact reduce operation

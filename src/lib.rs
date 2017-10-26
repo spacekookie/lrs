@@ -12,5 +12,8 @@ pub use terms::*;
 #[macro_use] mod clause;
 pub use clause::*;
 
+#[macro_use] mod result;
+pub use result::*;
+
 /* Unit tests below */
 mod tests;

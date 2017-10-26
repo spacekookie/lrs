@@ -6,7 +6,7 @@
 
 
 /// A logical symbol in a term
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Hash, Eq)]
 pub struct Symbol {
     pub val: char,
     pub state: bool,
