@@ -9,6 +9,7 @@ mod tests {
     use clause::*;
     use result::*;
 
+    /// Create a basic symbol
     #[test]
      fn lrs_symbol_create() {
         let s = symbol!["A"];
@@ -16,6 +17,7 @@ mod tests {
         assert!(s.state == true);
     }
 
+    /// Create a basic terms with a macro helper and symbols
     #[test]
     fn lrs_term_create() {
         let term = term!["A", "!🐎", "🍝", "!📰"];
@@ -26,6 +28,7 @@ mod tests {
         assert!(term.contains(&symbol!["!📰"]));
     }
 
+    /// Create a term, then remove symbols from it
     #[test]
     fn lrs_term_remove() {
         let mut term = term!["A", "!🐎", "🍝", "!📰"];
@@ -46,6 +49,7 @@ mod tests {
         assert!(! term.contains(&symbol!["!📰"]));
     }
 
+    /// Create a term, then insert further symbols
     #[test]
     fn lrs_term_insert() {
         let mut term = term!["A"];
@@ -136,6 +140,28 @@ mod tests {
         assert_eq!(r.solvable, true);
 
         println!("{:?}", r);
+    }
+
+
+    #[test]
+    fn lrs_count_symbols() {
+        let cl = clause![   term!["A", "B"], 
+                            term!["A", "!C"], 
+                            term!["C"], 
+                            term!["B"],
+                            term!["A"]
+                        ];
+
+        let count = cl.count_symbols();
+        let a: i32 = *count.get(&symbol!["A"]).unwrap();
+        let b: i32 = *count.get(&symbol!["B"]).unwrap();
+        let c: i32 = *count.get(&symbol!["C"]).unwrap();
+        let nc: i32 = *count.get(&symbol!["!C"]).unwrap();
+
+        assert_eq!(a, 3);
+        assert_eq!(b, 2);
+        assert_eq!(c, 1);
+        assert_eq!(nc, 1);
     }
 
     // #[test]
