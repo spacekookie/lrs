@@ -14,9 +14,9 @@ fn create() {
 /// A simple function that creates a Symbol via the utility macro
 #[test]
 fn create_macro() {
-    let s = symbol!["A"];
+    let s = symbol!["!A"];
     assert!(s.val == 'A');
-    assert!(s.state == true);
+    assert!(s.state == false);
 }
 
 /// A simple function which tests that "==" asserts correctly for Symbol structs

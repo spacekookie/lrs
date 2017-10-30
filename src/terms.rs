@@ -154,7 +154,7 @@ macro_rules! term {
 }
 
 
-/// A slightly smaller helper macro that creates a symbol based on a string
+/// A very simple helper macro which takes a string and turns it into a symbol
 #[macro_export]
 macro_rules! symbol {
     ($x:expr) => {{

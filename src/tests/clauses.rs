@@ -11,20 +11,29 @@ fn create() {
     assert_eq!(c1, c2);
 }
 
-
 #[test]
 fn compare() {
     let c1 = clause![term!["A"]];
     let c2 = clause![term!["A"]];
-    assert_eq!(c1, c2);
+    assert!(c1 == c2);
 
     let c3 = clause![term!["A", "B"], term!["!B"]];
     let c4 = clause![term!["B", "A"], term!["!B"]];
-    assert_eq!(c3, c4);
+    assert!(c3 == c4);
     
     let c5 = clause![term!["A", "B"], term!["B"]];
     let c6 = clause![term!["A"], term!["!B"]];
     assert!(c5 != c6);
+}
+
+#[test]
+fn insert() {
+    let mut c = clause![term!["A"]];
+    c.insert(term!["!A", "B"]);
+
+    assert!(c.contains(&term!["A"]) == true);
+    assert!(c.contains(&term!["!A", "B"]) == true);
+    assert!(c.contains(&term!["A", "B"]) == false);
 }
 
 #[test]
@@ -54,7 +63,6 @@ fn reduce_2() {
     /* Should now look like {A, !B} & {C, !D} */
     assert_eq!(cl, clause![a, b]);
 }
-
 
 #[test]
 fn count_symbols() {
