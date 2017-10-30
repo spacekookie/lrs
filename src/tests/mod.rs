@@ -4,8 +4,8 @@
 //!
 //! If you find sections that need more testing or where test code is not 
 //! understandable, please don't shy away from creating a new module
-//!
-//!
+//! 
+//! 
 //! Here is also a little guide how to write new unit tests for LRS. Generally 
 //! test cases should rely on as little external code as possible. A test case 
 //! should create it's own data, work on it and then assert success or failure.
@@ -24,8 +24,24 @@
 //! philosophy should be used.
 //!
 //! For any further questions about testing, don't hesitate to contact me 
-
+#![allow(unused)]
 
 mod symbols;
 mod terms;
 mod clauses;
+
+use terms::*;
+use clause::*;
+use result::*;
+
+
+/// A small function which tests result creation
+#[test]
+fn result_create() {
+    let r = result![true, ("A", false), ("B", true)];
+    assert_eq!(r.symbols.get(&symbol!["A"]).unwrap(), &false);
+    assert_eq!(r.symbols.get(&symbol!["B"]).unwrap(), &true);
+    assert_eq!(r.solvable, true);
+
+    println!("{:?}", r);
+}

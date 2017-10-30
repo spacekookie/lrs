@@ -1,5 +1,5 @@
 //! A module that handles unit testing for symbols
-#[allow(unused)]
+#![allow(unused)]
 
 use terms::*;
 
