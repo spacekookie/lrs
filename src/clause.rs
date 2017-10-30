@@ -6,6 +6,8 @@ use clause::OperationType::DERIVE;
 // use clause::OperationType::DELETE;
 // use clause::OperationType::BRANCH;
 
+use std::collections::HashMap;
+
 /// Represents a logical equation in conjunctive normal form
 /// Consists of a finite collection of Terms of symbols chained via OR
 /// that are chained in the clause with AND operations.
@@ -117,6 +119,28 @@ impl Clause {
         }
 
         return false;
+    }
+
+
+    /// A function that counts all occurances of symbols in the clause. Can be used
+    ///   to estimate a best-reduction-strategy for a given clause to avoid potential
+    ///   locks further steps down the line.
+    pub fn count_symbols(&self) -> HashMap<Symbol, i32> {
+        let mut map = HashMap::new();
+
+        for t in &self.terms {
+
+            for sym in &t.symbols {
+
+                if map.contains_key(sym) {
+                    let num: i32 = *map.get(sym).unwrap();
+                    map.insert(sym.clone(), num + 1);
+                } else {
+                    map.insert(sym.clone(), 1);
+                }
+            }
+        }
+        return map;
     }
 
     //////////////////////////////////////////////////////////////
