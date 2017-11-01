@@ -25,14 +25,18 @@
 //!
 //! For any further questions about testing, don't hesitate to contact me 
 #![allow(unused)]
+#![feature(test)]
+#![cfg(test)]
 
 mod symbols;
 mod terms;
 mod clauses;
+mod benches;
 
 use terms::*;
 use clause::*;
 use result::*;
+
 
 
 /// A small function which tests result creation

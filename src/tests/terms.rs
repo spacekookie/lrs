@@ -89,3 +89,11 @@ fn compare() {
     assert!(a == c);
     assert!(a != b);
 }
+
+#[test]
+fn offence() {
+    let a = term!["A", "!A"];
+    let off = a.find_offending();
+
+    println!("{:?}", off);
+}
