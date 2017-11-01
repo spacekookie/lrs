@@ -31,7 +31,6 @@
 mod symbols;
 mod terms;
 mod clauses;
-mod benches;
 
 use terms::*;
 use clause::*;
